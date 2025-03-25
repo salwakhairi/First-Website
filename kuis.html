@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .navbar {
+            background: #333;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 20px;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 20px;
+        }
+        .navbar a:hover {
+            background: #575757;
+            border-radius: 5px;
+        }
+        .nav-links {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="#" class="logo">AYO Belajar</a>
+        <div class="nav-links">
+            <a href="index.html">HOME</a>
+            <a href="Materi.html"> MATERI</a>
+            <a href="kuis.html">KUIS</a>
+            <a href="contact.html">CONTACT</a>
+           
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuis Desain Grafis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fdf9f9;
+            text-align: center;
+            padding: 20px;
+        }
+        .quiz-container {
+            background: rgb(230, 228, 228);
+            width: 100%;
+            margin: auto;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(255, 254, 254, 0.1);
+            border-radius: 10px;
+        }
+        .question {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .option {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            background: #bdd6bb;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .option:hover {
+            background: #6ac2eb;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .score {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h2>Kuis Desain Grafis</h2>
+        <div id="question" class="question"></div>
+        <div id="options"></div>
+        <div id="result" class="result"></div>
+        <div id="score" class="score">Skor: 0</div>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                question: "Apa yang dimaksud dengan desain grafis?",
+                options: [
+                    "A. Seni menggambar menggunakan tangan tanpa alat digital",
+                    "B. Proses komunikasi visual menggunakan elemen seperti teks, gambar, dan warna",
+                    "C. Keterampilan mengedit foto tanpa memperhatikan elemen desain"
+                ],
+                answer: 1
+            },
+            {
+                question: "Software mana yang paling umum digunakan dalam desain grafis?",
+                options: [
+                    "A. Microsoft Word dan Excel",
+                    "B. Adobe Photoshop, Adobe Illustrator, dan CorelDRAW",
+                    "C. Google Chrome dan Mozilla Firefox"
+                ],
+                answer: 1    
+            },
+            {
+                question: "Apa perbedaan utama antara desain vektor dan raster?",
+                options: [
+                    "A. Vektor berbasis piksel, raster berbasis garis",
+                    "B. Vektor dapat diperbesar tanpa pecah, raster bisa pecah saat diperbesar",
+                    "C. Raster hanya digunakan untuk ilustrasi digital"
+                ],
+                answer: 1
+            },
+            {
+                question: "Elemen dasar dalam desain grafis meliputi?",
+                options: [
+                    "A. Garis, warna, tekstur, bentuk, dan ruang",
+                    "B. Kamera, pencahayaan, sudut pandang, dan resolusi",
+                    "C. Kertas, pensil, kuas, dan kanvas"
+                ],
+                answer: 0
+            },
+            {
+                question: "Mengapa prinsip desain seperti keseimbangan dan kontras penting?",
+                options: [
+                    "A. Untuk membuat desain lebih menarik dan mudah dipahami",
+                    "B. Untuk menambah efek 3D pada gambar",
+                    "C. Untuk membuat desain lebih sulit dimengerti"
+                ],
+                answer: 0
+            },
+
+            
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        const questionElement = document.getElementById("question");
+        const optionsElement = document.getElementById("options");
+        const resultElement = document.getElementById("result");
+        const scoreElement = document.getElementById("score");
+
+        function loadQuestion() {
+            const q = quizData[currentQuestion];
+            questionElement.textContent = q.question;
+            optionsElement.innerHTML = "";
+            q.options.forEach((option, index) => {
+                const button = document.createElement("button");
+                button.textContent = option;
+                button.classList.add("option");
+                button.onclick = () => checkAnswer(index);
+                optionsElement.appendChild(button);
+            });
+        }
+
+        function checkAnswer(selectedIndex) {
+            if (selectedIndex === quizData[currentQuestion].answer) {
+                resultElement.textContent = "Jawaban benar!";
+                resultElement.style.color = "green";
+                score++;
+            } else {
+                resultElement.textContent = "Jawaban salah!";
+                resultElement.style.color = "red";
+            }
+            scoreElement.textContent = "Skor: " + score;
+            setTimeout(() => {
+                currentQuestion++;
+                if (currentQuestion < quizData.length) {
+                    resultElement.textContent = "";
+                    loadQuestion();
+                } else {
+                    resultElement.textContent = "Kuis selesai!";
+                }
+            }, 1000);
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>
+
